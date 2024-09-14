@@ -1,0 +1,15 @@
+diff --git a/build/commands/lib/syncUtils.js b/build/commands/lib/syncUtils.js
+--- a/build/commands/lib/syncUtils.js
++++ b/build/commands/lib/syncUtils.js
+@@ -122,9 +122,10 @@
+     '--nohooks',
+     '--revision',
+     'src@' + requiredChromiumRef,
+     '--reset',
+-    '--upstream'
++    '--upstream',
++    '--no-history'
+   ]
+ 
+   if (program.fetch_all) {
+     args.push('--with_tags')
