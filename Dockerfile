@@ -1,7 +1,5 @@
 FROM node:20
 
-ENV VERSION="v1.60.27"
-
 RUN apt update && apt install -y gperf sudo nano
 
 
