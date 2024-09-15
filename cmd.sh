@@ -1,8 +1,9 @@
-docker run -it --rm -v $PWD/out:/brave-browser/src/out:z --user 1000  brave /bin/bash -c \
+docker run -it --rm -v $PWD/out:/brave-browser/src/out:z -v $PWD/patches:/brave-browser/src/patches:z --user 1000  brave /bin/bash -c \
 "
-
 cd /brave-browser/src/
 
+git apply patches/optimize.patch
+touch -acm -t 197001010000.00 build/config/compiler/BUILD.gn +
 
 cd /brave-browser/src/brave 
 npm run build -- Static --gn is_official_build:true --gn chrome_pgo_phase:2 \
