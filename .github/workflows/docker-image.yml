@@ -9,6 +9,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - name: Maximize build space
+      uses: rokibhasansagar/slimhub_actions@main
+    - name: Checkout code
+      uses: actions/checkout@v4
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag brave:v1.69.162
