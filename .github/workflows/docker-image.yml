@@ -13,7 +13,17 @@ jobs:
       uses: rokibhasansagar/slimhub_actions@main
       with:
         retain: "docker_buildkit"
+
     - name: Checkout code
       uses: actions/checkout@v4
+
+    - name: Log into registry
+      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag brave:v1.69.162
+            
+            
+    - name: Push image
+      run: |
+        docker push brave:v1.69.162
