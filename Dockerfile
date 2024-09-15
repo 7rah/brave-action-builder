@@ -21,10 +21,3 @@ COPY no-history.patch .
 RUN git apply no-history.patch
 
 RUN npm run init
-
-WORKDIR /brave-browser/src
-
-COPY optimize.patch .
-RUN git apply optimize.patch
-
-WORKDIR /brave-browser/src/brave
