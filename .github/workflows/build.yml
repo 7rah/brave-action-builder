@@ -27,7 +27,7 @@ jobs:
         timeout 10m bash cmd.sh || echo
 
     - name: Save build result
-    - run: |
+      run: |
         sudo tar cvf out.tar out
     - uses: actions/cache/save@v4
       with:
@@ -40,7 +40,7 @@ jobs:
     needs: build-1
     steps:
     - name: restore cache
-    - uses: actions/cache/restore@v3
+      uses: actions/cache/restore@v3
       with:
         path: out
         key: 'build-1'
