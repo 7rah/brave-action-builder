@@ -25,17 +25,13 @@ jobs:
         mkdir -p $PWD/out
         sudo chown -R 1000:1000 $PWD/out
         timeout 2m bash cmd.sh || echo
-
-    - name: Save build result
-      run: |
-        sudo tar cvf build-1.tar out
         
     - name: Upload container image
       uses: actions/upload-artifact@v4
       with:
         name: build-1
-        path: build-1.tar
-        compression-level: 0
+        path: out
+        compression-level: 2
 
   build-2:
     runs-on: ubuntu-latest
@@ -46,8 +42,7 @@ jobs:
       with:
         name: build-1
     - run: |
-        sudo tar xvf build-1.tar
-        sudo rm build-1.tar
+        sudo chown -R 1000:1000 $PWD/out
         
     - name: Maximize build space
       uses: rokibhasansagar/slimhub_actions@main
