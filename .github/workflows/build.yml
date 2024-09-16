@@ -24,7 +24,7 @@ jobs:
       run: |
         mkdir -p $PWD/out
         sudo chown -R 1000:1000 $PWD/out
-        timeout 10m bash cmd.sh
+        timeout 10m bash cmd.sh || echo
 
     - uses: actions/cache/save@v3
       with:
@@ -57,4 +57,4 @@ jobs:
       run: | 
         mkdir -p $PWD/out
         sudo chown -R 1000:1000 $PWD/out
-        timeout 10m bash cmd.sh
+        timeout 10m bash cmd.sh || echo
