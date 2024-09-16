@@ -25,13 +25,13 @@ jobs:
         mkdir -p $PWD/out
         sudo chown -R 1000:1000 $PWD/out
         timeout 10m bash cmd.sh || echo
-        
-    - name: Setup upterm session
-      uses: lhotari/action-upterm@v1
-      
+
+    - name: Save build result
+    - run: |
+        sudo tar cvf out.tar out
     - uses: actions/cache/save@v4
       with:
-        path: out
+        path: out.tar
         key: 'build-1'
         compression-level: 0
 
@@ -39,6 +39,15 @@ jobs:
     runs-on: ubuntu-latest
     needs: build-1
     steps:
+    - name: restore cache
+    - uses: actions/cache/restore@v3
+      with:
+        path: out
+        key: 'build-1'
+    - run: |
+        sudo tar xvf out.tar
+        sudo rm out.tar
+        
     - name: Maximize build space
       uses: rokibhasansagar/slimhub_actions@main
       with:
@@ -49,12 +58,6 @@ jobs:
 
     - name: Download the Docker image
       run: docker pull chezzn/brave
-
-    - name: restore cache
-      uses: actions/cache/restore@v3
-      with:
-        path: out
-        key: 'build-1'
 
     - name: Run build
       run: | 
