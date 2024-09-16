@@ -6,8 +6,38 @@ on:
 
 jobs:
 
-  build:
+  build-1:
     runs-on: ubuntu-latest
+    steps:
+    - name: Maximize build space
+      run: | 
+        sudo rm -rf /usr/share/dotnet
+        sudo rm -rf /usr/local/lib/android
+        sudo rm -rf /opt/ghc
+        sudo rm -rf /opt/hostedtoolcache/CodeQL
+        sudo docker image prune --all --force
+
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Download the Docker image
+      run: docker pull chezzn/brave
+
+    - name: Run build
+      run: |
+        | mkdir -p $PWD/out
+        | sudo chown -R 1000:1000 $PWD/out
+        | timeout 10m bash cmd.sh
+
+    - uses: actions/cache/save@v3
+      with:
+        path: out
+        key: 'build-1'
+        compression-level: 0
+
+  build-2:
+    runs-on: ubuntu-latest
+    needs: build-1
     steps:
     - name: Maximize build space
       uses: rokibhasansagar/slimhub_actions@main
@@ -20,8 +50,14 @@ jobs:
     - name: Download the Docker image
       run: docker pull chezzn/brave
 
+    - name: restore cache
+      uses: actions/cache/restore@v3
+      with:
+        path: out
+        key: 'build-1'
+
     - name: Run build
-      run: |
-        mkdir -p $PWD/out
-        sudo chown -R 1000:1000 $PWD/out
-        bash cmd.sh
+      run: | 
+        | mkdir -p $PWD/out
+        | sudo chown -R 1000:1000 $PWD/out
+        | timeout 10m bash cmd.sh
