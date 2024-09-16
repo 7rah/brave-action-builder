@@ -21,4 +21,7 @@ jobs:
       run: docker pull chezzn/brave
 
     - name: Run build
-      run: bash cmd.sh
+      run: |
+        mkdir -p $PWD/out
+        sudo chown -R 1000:1000 $PWD/out
+        bash cmd.sh
