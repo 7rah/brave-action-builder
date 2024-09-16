@@ -8,6 +8,9 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
     - name: Maximize build space
       uses: rokibhasansagar/slimhub_actions@main
