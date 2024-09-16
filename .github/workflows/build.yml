@@ -9,13 +9,13 @@ jobs:
   build-1:
     runs-on: ubuntu-latest
     steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
     - name: Maximize build space
       uses: rokibhasansagar/slimhub_actions@main
       with:
         retain: "docker_buildkit"
-
-    - name: Checkout code
-      uses: actions/checkout@v4
 
     - name: Download the Docker image
       run: docker pull chezzn/brave
@@ -37,26 +37,23 @@ jobs:
     runs-on: ubuntu-latest
     needs: build-1
     steps:
-    - name: Download build1 cache
-      uses: actions/download-artifact@v4
-      with:
-        name: build-1
-    - run: |
-        sudo chown -R 1000:1000 $PWD/out
+    - name: Checkout code
+      uses: actions/checkout@v4
         
     - name: Maximize build space
       uses: rokibhasansagar/slimhub_actions@main
       with:
         retain: "docker_buildkit"
-
-    - name: Checkout code
-      uses: actions/checkout@v4
+        
+    - name: Download build1 cache
+      uses: actions/download-artifact@v4
+      with:
+        name: build-1
 
     - name: Download the Docker image
       run: docker pull chezzn/brave
 
     - name: Run build
       run: | 
-        mkdir -p $PWD/out
         sudo chown -R 1000:1000 $PWD/out
         timeout 10m bash cmd.sh || echo
