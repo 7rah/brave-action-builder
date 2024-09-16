@@ -17,6 +17,10 @@ jobs:
         sudo rm -rf /opt/hostedtoolcache/CodeQL
         sudo docker image prune --all --force
 
+        echo "::group::<{[>]}> Free Disk Space After Cleanup <{[<]}>"
+        df --sync -BM --output=pcent,used,avail /
+        echo "::endgroup::"
+
     - name: Checkout code
       uses: actions/checkout@v4
 
