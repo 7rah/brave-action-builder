@@ -8,9 +8,6 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
     steps:
     - name: Maximize build space
       uses: rokibhasansagar/slimhub_actions@main
@@ -20,13 +17,23 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Log into registry
-      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+    #- name: Log into registry
+    #  run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ghcr.io/${{ github.repository_owner }}/brave:v1.69.162
-            
-            
-    - name: Push image
+      run: podman build . --file Dockerfile --tag brave # ghcr.io/${{ github.repository_owner }}/brave:v1.69.162
+    - name: Save container image
       run: |
-        docker push ghcr.io/${{ github.repository_owner }}/brave:v1.69.162
+         podman save brave > brave.tar
+      
+    - name: Upload container image
+      uses: actions/upload-artifact@v4
+      with:
+        name: brave
+        path: brave.tar
+        retention-days: 1
+        compression-level: 0    
+            
+    #- name: Push image
+    #  run: |
+    #    docker push ghcr.io/${{ github.repository_owner }}/brave:v1.69.162
