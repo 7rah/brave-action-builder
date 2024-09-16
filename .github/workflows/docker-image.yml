@@ -21,7 +21,7 @@ jobs:
     #  run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
     - name: Build the Docker image
-      run: podman build . --file Dockerfile --tag brave # ghcr.io/${{ github.repository_owner }}/brave:v1.69.162
+      run: podman build . --file Dockerfile --tag brave --ulimit nofile=1048576:1048576 # ghcr.io/${{ github.repository_owner }}/brave:v1.69.162
     - name: Save container image
       run: |
          podman save brave > brave.tar
