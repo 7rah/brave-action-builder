@@ -28,7 +28,7 @@ jobs:
       run: |
         mkdir -p $PWD/out
         sudo chown -R 1000:1000 $PWD/out
-        timeout 5h bash cmd.sh || echo
+        timeout 10m bash cmd.sh || echo
         sudo chown -R `whoami` $PWD/out
         
     - name: Upload container image
@@ -53,6 +53,7 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: build-1
+        path: out
 
     - name: Download the Docker image
       run: docker pull chezzn/brave
@@ -80,10 +81,11 @@ jobs:
       with:
         retain: "docker_buildkit"
         
-    - name: Download build1 cache
+    - name: Download build2 cache
       uses: actions/download-artifact@v4
       with:
         name: build-2
+        path: out
 
     - name: Download the Docker image
       run: docker pull chezzn/brave
@@ -112,10 +114,11 @@ jobs:
       with:
         retain: "docker_buildkit"
         
-    - name: Download build1 cache
+    - name: Download build3 cache
       uses: actions/download-artifact@v4
       with:
         name: build-3
+        path: out
 
     - name: Download the Docker image
       run: docker pull chezzn/brave
@@ -145,10 +148,11 @@ jobs:
       with:
         retain: "docker_buildkit"
         
-    - name: Download build1 cache
+    - name: Download build4 cache
       uses: actions/download-artifact@v4
       with:
         name: build-4
+        path: out
 
     - name: Download the Docker image
       run: docker pull chezzn/brave
@@ -177,10 +181,11 @@ jobs:
       with:
         retain: "docker_buildkit"
         
-    - name: Download build1 cache
+    - name: Download build5 cache
       uses: actions/download-artifact@v4
       with:
         name: build-5
+        path: out
 
     - name: Download the Docker image
       run: docker pull chezzn/brave
