@@ -23,9 +23,8 @@ jobs:
     - name: Run build
       run: |
         mkdir -p $PWD/out
-        sudo chown -R 1000:1000 $PWD/out
+        sudo chown -R `whoami`:`whoami` $PWD/out
         timeout 2m bash cmd.sh || echo
-        sudo chown -R $(whoami):$(whoami) $PWD/out
         
     - name: Upload container image
       uses: actions/upload-artifact@v4
