@@ -61,7 +61,7 @@ jobs:
 
     - name: Restore build result
       run: |
-        sudo tar -xvf --use-compress-program="zstd -1 -T0" out.tar
+        sudo tar -xvf out.tar
         sudo rm out.tar
       
     - name: Download the Docker image
@@ -103,7 +103,7 @@ jobs:
 
     - name: Restore build result
       run: |
-        sudo tar -xvf --use-compress-program="zstd -1 -T0" out.tar
+        sudo tar -xvf out.tar
         sudo rm out.tar
       
     - name: Download the Docker image
@@ -145,7 +145,7 @@ jobs:
 
     - name: Restore build result
       run: |
-        sudo tar -xvf --use-compress-program="zstd -1 -T0" out.tar
+        sudo tar -xvf out.tar
         sudo rm out.tar
       
     - name: Download the Docker image
@@ -187,7 +187,7 @@ jobs:
 
     - name: Restore build result
       run: |
-        sudo tar -xvf --use-compress-program="zstd -1 -T0" out.tar
+        sudo tar -xvf out.tar
         sudo rm out.tar
       
     - name: Download the Docker image
@@ -229,7 +229,7 @@ jobs:
 
     - name: Restore build result
       run: |
-        sudo tar -xvf --use-compress-program="zstd -1 -T0" out.tar
+        sudo tar -xvf out.tar
         sudo rm out.tar
       
     - name: Download the Docker image
