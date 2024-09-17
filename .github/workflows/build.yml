@@ -28,18 +28,19 @@ jobs:
       run: |
         mkdir -p $PWD/out
         sudo chown -R 1000:1000 $PWD/out
-        timeout 2m bash cmd.sh || echo
-        sudo chown -R `whoami` $PWD/out
+        timeout 3m bash cmd.sh || echo
 
     - name: tar out
       run: |
-        sudo tar -cpf out.tar out
+        sudo tar --use-compress-program="zstd -1 -T0" -cvpf out.tar out
 
-    - name: Upload container image
+    - name: Upload build result
       uses: actions/upload-artifact@v4
       with:
         name: build-1
         path: out.tar
+        compression-level: 0
+
 
   build-2:
     runs-on: ubuntu-latest
@@ -58,9 +59,9 @@ jobs:
       with:
         name: build-1
 
-    - name: build1 cache
+    - name: Restore build result
       run: |
-        sudo tar -xvf out.tar
+        sudo tar -xvf --use-compress-program="zstd -1 -T0" out.tar
         sudo rm out.tar
       
     - name: Download the Docker image
@@ -68,15 +69,21 @@ jobs:
 
     - name: Run build
       run: | 
-        sudo chown -R 1000:1000 $PWD/out
-        timeout 5h bash cmd.sh || echo
-        sudo chown -R `whoami` $PWD/out
-        
-    - name: Upload container image
+        timeout 10m bash cmd.sh || echo
+    
+    - name: tar out
+      run: |
+        sudo tar --use-compress-program="zstd -1 -T0" -cvpf out.tar out
+
+
+    - name: Upload build result
       uses: actions/upload-artifact@v4
       with:
         name: build-2
-        path: out
+        path: out.tar
+        compression-level: 0
+
+
   build-3:
     runs-on: ubuntu-latest
     needs: build-2
@@ -88,27 +95,36 @@ jobs:
       uses: rokibhasansagar/slimhub_actions@main
       with:
         retain: "docker_buildkit"
-        
-    - name: Download build2 cache
+      
+    - name: Download build1 cache
       uses: actions/download-artifact@v4
       with:
         name: build-2
-        path: out
 
+    - name: Restore build result
+      run: |
+        sudo tar -xvf --use-compress-program="zstd -1 -T0" out.tar
+        sudo rm out.tar
+      
     - name: Download the Docker image
       run: docker pull chezzn/brave
 
     - name: Run build
       run: | 
-        sudo chown -R 1000:1000 $PWD/out
         timeout 5h bash cmd.sh || echo
-        sudo chown -R `whoami` $PWD/out
-        
-    - name: Upload container image
+    
+    - name: tar out
+      run: |
+        sudo tar --use-compress-program="zstd -1 -T0" -cvpf out.tar out
+
+
+    - name: Upload build result
       uses: actions/upload-artifact@v4
       with:
         name: build-3
-        path: out
+        path: out.tar
+        compression-level: 0
+
 
   build-4:
     runs-on: ubuntu-latest
@@ -121,27 +137,35 @@ jobs:
       uses: rokibhasansagar/slimhub_actions@main
       with:
         retain: "docker_buildkit"
-        
-    - name: Download build3 cache
+      
+    - name: Download build1 cache
       uses: actions/download-artifact@v4
       with:
         name: build-3
-        path: out
 
+    - name: Restore build result
+      run: |
+        sudo tar -xvf --use-compress-program="zstd -1 -T0" out.tar
+        sudo rm out.tar
+      
     - name: Download the Docker image
       run: docker pull chezzn/brave
 
     - name: Run build
       run: | 
-        sudo chown -R 1000:1000 $PWD/out
         timeout 5h bash cmd.sh || echo
-        sudo chown -R `whoami` $PWD/out
-        
-    - name: Upload container image
+    
+    - name: tar out
+      run: |
+        sudo tar --use-compress-program="zstd -1 -T0" -cvpf out.tar out
+
+
+    - name: Upload build result
       uses: actions/upload-artifact@v4
       with:
         name: build-4
-        path: out
+        path: out.tar
+        compression-level: 0
 
 
   build-5:
@@ -155,27 +179,36 @@ jobs:
       uses: rokibhasansagar/slimhub_actions@main
       with:
         retain: "docker_buildkit"
-        
-    - name: Download build4 cache
+      
+    - name: Download build1 cache
       uses: actions/download-artifact@v4
       with:
         name: build-4
-        path: out
 
+    - name: Restore build result
+      run: |
+        sudo tar -xvf --use-compress-program="zstd -1 -T0" out.tar
+        sudo rm out.tar
+      
     - name: Download the Docker image
       run: docker pull chezzn/brave
 
     - name: Run build
       run: | 
-        sudo chown -R 1000:1000 $PWD/out
         timeout 5h bash cmd.sh || echo
-        sudo chown -R `whoami` $PWD/out
-        
-    - name: Upload container image
+    
+    - name: tar out
+      run: |
+        sudo tar --use-compress-program="zstd -1 -T0" -cvpf out.tar out
+
+
+    - name: Upload build result
       uses: actions/upload-artifact@v4
       with:
         name: build-5
-        path: out
+        path: out.tar
+        compression-level: 0
+
 
   build-6:
     runs-on: ubuntu-latest
@@ -188,24 +221,32 @@ jobs:
       uses: rokibhasansagar/slimhub_actions@main
       with:
         retain: "docker_buildkit"
-        
-    - name: Download build5 cache
+      
+    - name: Download build1 cache
       uses: actions/download-artifact@v4
       with:
         name: build-5
-        path: out
 
+    - name: Restore build result
+      run: |
+        sudo tar -xvf --use-compress-program="zstd -1 -T0" out.tar
+        sudo rm out.tar
+      
     - name: Download the Docker image
       run: docker pull chezzn/brave
 
     - name: Run build
       run: | 
-        sudo chown -R 1000:1000 $PWD/out
         timeout 5h bash cmd.sh || echo
-        sudo chown -R `whoami` $PWD/out
-        
-    - name: Upload container image
+    
+    - name: tar out
+      run: |
+        sudo tar --use-compress-program="zstd -1 -T0" -cvpf out.tar out
+
+
+    - name: Upload build result
       uses: actions/upload-artifact@v4
       with:
         name: build-6
-        path: out
+        path: out.tar
+        compression-level: 0
