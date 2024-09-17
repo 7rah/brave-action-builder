@@ -26,13 +26,13 @@ jobs:
       run: |
          sudo mkdir -p /mnt/podman
          sudo chown `whoami`:`whoami` /mnt/podman
-         docker save brave > /mnt/podman/brave.tar
+         docker save brave > brave.tar
       
     - name: Upload container image
       uses: actions/upload-artifact@v4
       with:
         name: brave
-        path: /mnt/podman/brave.tar
+        path: brave.tar
         retention-days: 1
         compression-level: 2    
             
