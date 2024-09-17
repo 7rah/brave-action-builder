@@ -28,14 +28,18 @@ jobs:
       run: |
         mkdir -p $PWD/out
         sudo chown -R 1000:1000 $PWD/out
-        timeout 10m bash cmd.sh || echo
+        timeout 2m bash cmd.sh || echo
         sudo chown -R `whoami` $PWD/out
-        
+
+    - name: tar out
+      run: |
+        sudo tar -cpf out.tar out
+
     - name: Upload container image
       uses: actions/upload-artifact@v4
       with:
         name: build-1
-        path: out
+        path: out.tar
 
   build-2:
     runs-on: ubuntu-latest
@@ -48,13 +52,17 @@ jobs:
       uses: rokibhasansagar/slimhub_actions@main
       with:
         retain: "docker_buildkit"
-        
+      
     - name: Download build1 cache
       uses: actions/download-artifact@v4
       with:
         name: build-1
-        path: out
 
+    - name: build1 cache
+      run: |
+        sudo tar -xvf out.tar
+        sudo rm out.tar
+      
     - name: Download the Docker image
       run: docker pull chezzn/brave
 
