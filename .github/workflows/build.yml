@@ -20,15 +20,17 @@ jobs:
     - name: Download the Docker image
       run: docker pull chezzn/brave
       
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
-      if : ${{ github.event_name == 'workflow_dispatch' }}
+    #- name: Setup tmate session
+    #  uses: mxschmitt/action-tmate@v3
+    #  if : ${{ github.event_name == 'workflow_dispatch' }}
     
     - name: Run build
       run: |
         mkdir -p $PWD/out
-        sudo chown -R `whoami`:`whoami` $PWD/out
+        sudo chown -R 1000:1000 $PWD/out
         timeout 2m bash cmd.sh || echo
+        sudo chown -R `whoami` $PWD/out
+
         
     - name: Upload container image
       uses: actions/upload-artifact@v4
