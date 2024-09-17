@@ -9,7 +9,7 @@ index 5898b8c54b..2e7b49dd5e 100644
 -        "-Wl,-O2",
 +        "-Wl,-O2","-Wl,-mllvm,-march=znver3", "-Wl,-mllvm,-fp-contract=fast", "-Wl,-zcommon-page-size=2097152", "-Wl,-zmax-page-size=2097152",
        ]
-+      common_optimize_on_cflags += ["-march=znver3", "-ffp-contract=fast",] # "-O3", 
++      common_optimize_on_cflags += ["-march=znver3", "-ffp-contract=fast",] # "-O3",
      }
 
      common_optimize_on_ldflags += [ "-Wl,--gc-sections" ]
