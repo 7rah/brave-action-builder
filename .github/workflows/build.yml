@@ -19,7 +19,9 @@ jobs:
 
     - name: Download the Docker image
       run: docker pull chezzn/brave
-
+      
+    - uses: valeriangalliat/action-sshd-cloudflared@v1
+    
     - name: Run build
       run: |
         mkdir -p $PWD/out
