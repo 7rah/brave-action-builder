@@ -24,15 +24,17 @@ jobs:
       run: docker build . --file Dockerfile --tag brave # ghcr.io/${{ github.repository_owner }}/brave:v1.69.162
     - name: Save container image
       run: |
-         docker save brave > brave.tar
+         sudo mkdir -p /mnt/podman
+         sudo chown `whoami`:`whoami` /mnt/podman
+         docker save brave > /mnt/podman/brave.tar
       
     - name: Upload container image
       uses: actions/upload-artifact@v4
       with:
         name: brave
-        path: brave.tar
+        path: /mnt/podman/brave.tar
         retention-days: 1
-        compression-level: 0    
+        compression-level: 2    
             
     #- name: Push image
     #  run: |
