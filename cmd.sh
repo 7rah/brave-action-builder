@@ -1,4 +1,4 @@
-docker run --rm -v $PWD/out:/brave-browser/src/out:z -v $PWD/patches:/brave-browser/src/patches:z --user 1000  chezzn/brave /bin/bash -c \
+docker run --rm -v $PWD/out:/brave-browser/src/out:z -v $PWD/patches:/brave-browser/src/patches:z --user `whoami`  chezzn/brave /bin/bash -c \
 "
 cd /brave-browser/src/
 
