@@ -26,19 +26,21 @@ jobs:
     
     - name: Run build
       run: |
-        mkdir -p $PWD/out
-        sudo chown -R 1000:1000 $PWD/out
-        timeout 315m bash cmd.sh || echo
+        sudo mkdir -p /mnt/build
+        sudo mkdir -p /mnt/build/out
+        sudo chown `whoami` /mnt/build
+        sudo chown -R 1000:1000 /mnt/build/out
+        timeout 10m bash cmd.sh || echo
 
     - name: tar out
       run: |
-        sudo tar --use-compress-program="zstd -1 -T0" -cvpf out.tar out
+        sudo tar --use-compress-program="zstd -1 -T0" -cvpf /mnt/build/out.tar /mnt/build/out
 
     - name: Upload build result
       uses: actions/upload-artifact@v4
       with:
         name: build-1
-        path: out.tar
+        path: /mnt/build/out.tar
         compression-level: 0
 
 
@@ -54,34 +56,40 @@ jobs:
       with:
         retain: "docker_buildkit"
       
-    - name: Download build1 cache
+    - name: Mkdir /out/build
+      run: |
+        sudo mkdir -p /mnt/build
+        sudo chown `whoami` /mnt/build
+
+    - name: Download build cache
       uses: actions/download-artifact@v4
       with:
         name: build-1
+        path: /mnt/build
 
     - name: Restore build result
       run: |
-        sudo tar -xvf out.tar
-        sudo rm out.tar
+        sudo tar -xvf /mnt/build/out.tar -C /mnt/build
+        sudo rm /mnt/build/out.tar
       
     - name: Download the Docker image
       run: docker pull chezzn/brave
 
     - name: Run build
       run: | 
-        timeout 315m bash cmd.sh || echo
+        timeout 10m bash cmd.sh || echo
     
     - name: tar out
       run: |
-        sudo tar --use-compress-program="zstd -1 -T0" -cvpf out.tar out
-
+        sudo tar --use-compress-program="zstd -1 -T0" -cvpf /mnt/build/out.tar /mnt/build/out
 
     - name: Upload build result
       uses: actions/upload-artifact@v4
       with:
-        name: build-2
-        path: out.tar
+        name: build-1
+        path: /mnt/build/out.tar
         compression-level: 0
+
 
 
   build-3:
@@ -96,33 +104,38 @@ jobs:
       with:
         retain: "docker_buildkit"
       
-    - name: Download build1 cache
+    - name: Mkdir /out/build
+      run: |
+        sudo mkdir -p /mnt/build
+        sudo chown `whoami` /mnt/build
+
+    - name: Download build cache
       uses: actions/download-artifact@v4
       with:
         name: build-2
+        path: /mnt/build
 
     - name: Restore build result
       run: |
-        sudo tar -xvf out.tar
-        sudo rm out.tar
+        sudo tar -xvf /mnt/build/out.tar -C /mnt/build
+        sudo rm /mnt/build/out.tar
       
     - name: Download the Docker image
       run: docker pull chezzn/brave
 
     - name: Run build
       run: | 
-        timeout 315m bash cmd.sh || echo
+        timeout 10m bash cmd.sh || echo
     
     - name: tar out
       run: |
-        sudo tar --use-compress-program="zstd -1 -T0" -cvpf out.tar out
-
+        sudo tar --use-compress-program="zstd -1 -T0" -cvpf /mnt/build/out.tar /mnt/build/out
 
     - name: Upload build result
       uses: actions/upload-artifact@v4
       with:
         name: build-3
-        path: out.tar
+        path: /mnt/build/out.tar
         compression-level: 0
 
 
@@ -138,33 +151,38 @@ jobs:
       with:
         retain: "docker_buildkit"
       
-    - name: Download build1 cache
+    - name: Mkdir /out/build
+      run: |
+        sudo mkdir -p /mnt/build
+        sudo chown `whoami` /mnt/build
+
+    - name: Download build cache
       uses: actions/download-artifact@v4
       with:
         name: build-3
+        path: /mnt/build
 
     - name: Restore build result
       run: |
-        sudo tar -xvf out.tar
-        sudo rm out.tar
+        sudo tar -xvf /mnt/build/out.tar -C /mnt/build
+        sudo rm /mnt/build/out.tar
       
     - name: Download the Docker image
       run: docker pull chezzn/brave
 
     - name: Run build
       run: | 
-        timeout 315m bash cmd.sh || echo
+        timeout 10m bash cmd.sh || echo
     
     - name: tar out
       run: |
-        sudo tar --use-compress-program="zstd -1 -T0" -cvpf out.tar out
-
+        sudo tar --use-compress-program="zstd -1 -T0" -cvpf /mnt/build/out.tar /mnt/build/out
 
     - name: Upload build result
       uses: actions/upload-artifact@v4
       with:
         name: build-4
-        path: out.tar
+        path: /mnt/build/out.tar
         compression-level: 0
 
 
@@ -180,33 +198,38 @@ jobs:
       with:
         retain: "docker_buildkit"
       
-    - name: Download build1 cache
+    - name: Mkdir /out/build
+      run: |
+        sudo mkdir -p /mnt/build
+        sudo chown `whoami` /mnt/build
+
+    - name: Download build cache
       uses: actions/download-artifact@v4
       with:
         name: build-4
+        path: /mnt/build
 
     - name: Restore build result
       run: |
-        sudo tar -xvf out.tar
-        sudo rm out.tar
+        sudo tar -xvf /mnt/build/out.tar -C /mnt/build
+        sudo rm /mnt/build/out.tar
       
     - name: Download the Docker image
       run: docker pull chezzn/brave
 
     - name: Run build
       run: | 
-        timeout 315m bash cmd.sh || echo
+        timeout 10m bash cmd.sh || echo
     
     - name: tar out
       run: |
-        sudo tar --use-compress-program="zstd -1 -T0" -cvpf out.tar out
-
+        sudo tar --use-compress-program="zstd -1 -T0" -cvpf /mnt/build/out.tar /mnt/build/out
 
     - name: Upload build result
       uses: actions/upload-artifact@v4
       with:
         name: build-5
-        path: out.tar
+        path: /mnt/build/out.tar
         compression-level: 0
 
 
@@ -222,31 +245,36 @@ jobs:
       with:
         retain: "docker_buildkit"
       
-    - name: Download build1 cache
+    - name: Mkdir /out/build
+      run: |
+        sudo mkdir -p /mnt/build
+        sudo chown `whoami` /mnt/build
+
+    - name: Download build cache
       uses: actions/download-artifact@v4
       with:
         name: build-5
+        path: /mnt/build
 
     - name: Restore build result
       run: |
-        sudo tar -xvf out.tar
-        sudo rm out.tar
+        sudo tar -xvf /mnt/build/out.tar -C /mnt/build
+        sudo rm /mnt/build/out.tar
       
     - name: Download the Docker image
       run: docker pull chezzn/brave
 
     - name: Run build
       run: | 
-        timeout 315m bash cmd.sh || echo
+        timeout 10m bash cmd.sh || echo
     
     - name: tar out
       run: |
-        sudo tar --use-compress-program="zstd -1 -T0" -cvpf out.tar out
-
+        sudo tar --use-compress-program="zstd -1 -T0" -cvpf /mnt/build/out.tar /mnt/build/out
 
     - name: Upload build result
       uses: actions/upload-artifact@v4
       with:
         name: build-6
-        path: out.tar
+        path: /mnt/build/out.tar
         compression-level: 0
