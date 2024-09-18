@@ -12,10 +12,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
       
-    #- name: Maximize build space
-    #  uses: rokibhasansagar/slimhub_actions@main
-    #  with:
-    #    retain: "docker_buildkit"
+    - name: Maximize build space
+      uses: rokibhasansagar/slimhub_actions@main
+      with:
+        retain: "docker_buildkit"
 
     - name: Setup tmate session
       uses: mxschmitt/action-tmate@v3
