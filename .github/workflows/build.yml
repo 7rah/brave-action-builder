@@ -12,25 +12,25 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
       
-    - name: Maximize build space
-      uses: rokibhasansagar/slimhub_actions@main
-      with:
-        retain: "docker_buildkit"
+    #- name: Maximize build space
+    #  uses: rokibhasansagar/slimhub_actions@main
+    #  with:
+    #    retain: "docker_buildkit"
 
-    #- name: Setup tmate session
-    #  uses: mxschmitt/action-tmate@v3
-    #  if : ${{ github.event_name == 'workflow_dispatch' }}
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
+      if : ${{ github.event_name == 'workflow_dispatch' }}
       
-    - name: Download the Docker image
-      run: docker pull chezzn/brave
-    
-    - name: Run build
-      run: |
-        sudo mkdir -p /mnt/build
-        sudo mkdir -p /mnt/build/out
-        sudo chown `whoami` /mnt/build
-        sudo chown -R 1000:1000 /mnt/build/out
-        timeout 315m bash cmd.sh || echo
+    #- name: Download the Docker image
+    #  run: docker pull chezzn/brave
+    #
+    #- name: Run build
+    #  run: |
+    #    sudo mkdir -p /mnt/build
+    #    sudo mkdir -p /mnt/build/out
+    #    sudo chown `whoami` /mnt/build
+    #    sudo chown -R 1000:1000 /mnt/build/out
+    #    timeout 315m bash cmd.sh || echo
 
     - name: tar out
       run: |
@@ -70,6 +70,7 @@ jobs:
     - name: Restore build result
       run: |
         sudo tar -xvf /mnt/build/out.tar -C /mnt/build
+        sudo chown -R 1000:1000 /mnt/build/out
         sudo rm /mnt/build/out.tar
       
     - name: Download the Docker image
@@ -118,6 +119,7 @@ jobs:
     - name: Restore build result
       run: |
         sudo tar -xvf /mnt/build/out.tar -C /mnt/build
+        sudo chown -R 1000:1000 /mnt/build/out
         sudo rm /mnt/build/out.tar
       
     - name: Download the Docker image
@@ -165,6 +167,7 @@ jobs:
     - name: Restore build result
       run: |
         sudo tar -xvf /mnt/build/out.tar -C /mnt/build
+        sudo chown -R 1000:1000 /mnt/build/out
         sudo rm /mnt/build/out.tar
       
     - name: Download the Docker image
@@ -212,6 +215,7 @@ jobs:
     - name: Restore build result
       run: |
         sudo tar -xvf /mnt/build/out.tar -C /mnt/build
+        sudo chown -R 1000:1000 /mnt/build/out
         sudo rm /mnt/build/out.tar
       
     - name: Download the Docker image
@@ -259,6 +263,7 @@ jobs:
     - name: Restore build result
       run: |
         sudo tar -xvf /mnt/build/out.tar -C /mnt/build
+        sudo chown -R 1000:1000 /mnt/build/out
         sudo rm /mnt/build/out.tar
       
     - name: Download the Docker image
