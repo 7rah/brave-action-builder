@@ -17,9 +17,9 @@ jobs:
       with:
         retain: "docker_buildkit"
 
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
-      if : ${{ github.event_name == 'workflow_dispatch' }}
+    #- name: Setup tmate session
+    #  uses: mxschmitt/action-tmate@v3
+    #  if : ${{ github.event_name == 'workflow_dispatch' }}
       
     - name: Download the Docker image
       run: docker pull chezzn/brave
