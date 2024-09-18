@@ -72,6 +72,11 @@ jobs:
         sudo tar -xvf /mnt/build/out.tar -C /mnt/build
         sudo chown -R 1000:1000 /mnt/build/out
         sudo rm /mnt/build/out.tar
+
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
+      if : ${{ github.event_name == 'workflow_dispatch' }}
+
       
     - name: Download the Docker image
       run: docker pull chezzn/brave
