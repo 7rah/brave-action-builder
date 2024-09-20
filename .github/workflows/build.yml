@@ -21,6 +21,13 @@ jobs:
     #  uses: mxschmitt/action-tmate@v3
     #  if : ${{ github.event_name == 'workflow_dispatch' }}
       
+    - name: Create swap file
+      run: |
+        sudo fallocate -l 32G /swapfile
+        sudo chmod 600 /swapfile
+        sudo mkswap /swapfile
+        sudo swapon /swapfile
+
     - name: Download the Docker image
       run: docker pull chezzn/brave
     
@@ -33,6 +40,8 @@ jobs:
         timeout 315m bash cmd.sh || echo
     - name: tar out
       run: |
+        sudo rm -rf /mnt/build/out/Static/chrome.tmp*
+        sudo rm -rf /mnt/build/out/Static/thinlto-cache
         sudo tar --use-compress-program="zstd -1 -T0" -cvpf /mnt/build/out.tar /mnt/build/out
     - name: Upload build result
       uses: actions/upload-artifact@v4
@@ -69,6 +78,13 @@ jobs:
         sudo tar -xvf /mnt/build/out.tar -C /
         sudo rm /mnt/build/out.tar
       
+    - name: Create swap file
+      run: |
+        sudo fallocate -l 32G /swapfile
+        sudo chmod 600 /swapfile
+        sudo mkswap /swapfile
+        sudo swapon /swapfile
+
     - name: Download the Docker image
       run: docker pull chezzn/brave
 
@@ -78,6 +94,8 @@ jobs:
     
     - name: tar out
       run: |
+        sudo rm -rf /mnt/build/out/Static/chrome.tmp*
+        sudo rm -rf /mnt/build/out/Static/thinlto-cache
         sudo tar --use-compress-program="zstd -1 -T0" -cvpf /mnt/build/out.tar /mnt/build/out
     - name: Upload build result
       uses: actions/upload-artifact@v4
@@ -115,6 +133,13 @@ jobs:
         sudo tar -xvf /mnt/build/out.tar -C /
         sudo rm /mnt/build/out.tar
       
+    - name: Create swap file
+      run: |
+        sudo fallocate -l 32G /swapfile
+        sudo chmod 600 /swapfile
+        sudo mkswap /swapfile
+        sudo swapon /swapfile
+
     - name: Download the Docker image
       run: docker pull chezzn/brave
 
@@ -124,6 +149,8 @@ jobs:
     
     - name: tar out
       run: |
+        sudo rm -rf /mnt/build/out/Static/chrome.tmp*
+        sudo rm -rf /mnt/build/out/Static/thinlto-cache
         sudo tar --use-compress-program="zstd -1 -T0" -cvpf /mnt/build/out.tar /mnt/build/out
     - name: Upload build result
       uses: actions/upload-artifact@v4
@@ -160,6 +187,13 @@ jobs:
         sudo tar -xvf /mnt/build/out.tar -C /
         sudo rm /mnt/build/out.tar
       
+    - name: Create swap file
+      run: |
+        sudo fallocate -l 32G /swapfile
+        sudo chmod 600 /swapfile
+        sudo mkswap /swapfile
+        sudo swapon /swapfile
+    
     - name: Download the Docker image
       run: docker pull chezzn/brave
 
@@ -169,6 +203,8 @@ jobs:
     
     - name: tar out
       run: |
+        sudo rm -rf /mnt/build/out/Static/chrome.tmp*
+        sudo rm -rf /mnt/build/out/Static/thinlto-cache
         sudo tar --use-compress-program="zstd -1 -T0" -cvpf /mnt/build/out.tar /mnt/build/out
     - name: Upload build result
       uses: actions/upload-artifact@v4
@@ -205,6 +241,13 @@ jobs:
         sudo tar -xvf /mnt/build/out.tar -C /
         sudo rm /mnt/build/out.tar
       
+    - name: Create swap file
+      run: |
+        sudo fallocate -l 32G /swapfile
+        sudo chmod 600 /swapfile
+        sudo mkswap /swapfile
+        sudo swapon /swapfile
+    
     - name: Download the Docker image
       run: docker pull chezzn/brave
 
@@ -214,6 +257,8 @@ jobs:
     
     - name: tar out
       run: |
+        sudo rm -rf /mnt/build/out/Static/chrome.tmp*
+        sudo rm -rf /mnt/build/out/Static/thinlto-cache
         sudo tar --use-compress-program="zstd -1 -T0" -cvpf /mnt/build/out.tar /mnt/build/out
     - name: Upload build result
       uses: actions/upload-artifact@v4
@@ -250,6 +295,13 @@ jobs:
         sudo tar -xvf /mnt/build/out.tar -C /
         sudo rm /mnt/build/out.tar
       
+    - name: Create swap file
+      run: |
+        sudo fallocate -l 32G /swapfile
+        sudo chmod 600 /swapfile
+        sudo mkswap /swapfile
+        sudo swapon /swapfile
+    
     - name: Download the Docker image
       run: docker pull chezzn/brave
 
@@ -259,6 +311,8 @@ jobs:
     
     - name: tar out
       run: |
+        sudo rm -rf /mnt/build/out/Static/chrome.tmp*
+        sudo rm -rf /mnt/build/out/Static/thinlto-cache
         sudo tar --use-compress-program="zstd -1 -T0" -cvpf /mnt/build/out.tar /mnt/build/out
     - name: Upload build result
       uses: actions/upload-artifact@v4
