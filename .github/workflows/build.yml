@@ -20,7 +20,10 @@ jobs:
     #- name: Setup tmate session
     #  uses: mxschmitt/action-tmate@v3
     #  if : ${{ github.event_name == 'workflow_dispatch' }}
-      
+
+    - name: Download the Docker image
+      run: docker pull chezzn/brave
+
     - name: Create swap file
       run: |
         sudo fallocate -l 32G /swapfile
@@ -28,8 +31,6 @@ jobs:
         sudo mkswap /swapfile
         sudo swapon /swapfile
 
-    - name: Download the Docker image
-      run: docker pull chezzn/brave
     
     - name: Run build
       run: |
@@ -78,15 +79,15 @@ jobs:
         sudo tar -xvf /mnt/build/out.tar -C /
         sudo rm /mnt/build/out.tar
       
+    - name: Download the Docker image
+      run: docker pull chezzn/brave
+
     - name: Create swap file
       run: |
         sudo fallocate -l 32G /swapfile
         sudo chmod 600 /swapfile
         sudo mkswap /swapfile
         sudo swapon /swapfile
-
-    - name: Download the Docker image
-      run: docker pull chezzn/brave
 
     - name: Run build
       run: | 
@@ -133,15 +134,15 @@ jobs:
         sudo tar -xvf /mnt/build/out.tar -C /
         sudo rm /mnt/build/out.tar
       
+    - name: Download the Docker image
+      run: docker pull chezzn/brave
+
     - name: Create swap file
       run: |
         sudo fallocate -l 32G /swapfile
         sudo chmod 600 /swapfile
         sudo mkswap /swapfile
         sudo swapon /swapfile
-
-    - name: Download the Docker image
-      run: docker pull chezzn/brave
 
     - name: Run build
       run: | 
@@ -187,15 +188,15 @@ jobs:
         sudo tar -xvf /mnt/build/out.tar -C /
         sudo rm /mnt/build/out.tar
       
+    - name: Download the Docker image
+      run: docker pull chezzn/brave
+
     - name: Create swap file
       run: |
         sudo fallocate -l 32G /swapfile
         sudo chmod 600 /swapfile
         sudo mkswap /swapfile
         sudo swapon /swapfile
-    
-    - name: Download the Docker image
-      run: docker pull chezzn/brave
 
     - name: Run build
       run: | 
@@ -241,15 +242,15 @@ jobs:
         sudo tar -xvf /mnt/build/out.tar -C /
         sudo rm /mnt/build/out.tar
       
+    - name: Download the Docker image
+      run: docker pull chezzn/brave
+
     - name: Create swap file
       run: |
         sudo fallocate -l 32G /swapfile
         sudo chmod 600 /swapfile
         sudo mkswap /swapfile
         sudo swapon /swapfile
-    
-    - name: Download the Docker image
-      run: docker pull chezzn/brave
 
     - name: Run build
       run: | 
@@ -295,15 +296,15 @@ jobs:
         sudo tar -xvf /mnt/build/out.tar -C /
         sudo rm /mnt/build/out.tar
       
+    - name: Download the Docker image
+      run: docker pull chezzn/brave
+
     - name: Create swap file
       run: |
         sudo fallocate -l 32G /swapfile
         sudo chmod 600 /swapfile
         sudo mkswap /swapfile
         sudo swapon /swapfile
-    
-    - name: Download the Docker image
-      run: docker pull chezzn/brave
 
     - name: Run build
       run: | 
