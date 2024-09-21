@@ -18,6 +18,17 @@ jobs:
 
     - name: Download the Docker image
       run: docker pull chezzn/brave
+      
+    - name: Create swap file
+      run: |
+        sudo fallocate -l 34G /swapfile
+        sudo chmod 600 /swapfile
+        sudo mkswap /swapfile
+        sudo swapon /swapfile
+        sudo fallocate -l 10G /mnt/swap
+        sudo chmod 600 /mnt/swap
+        sudo mkswap /mnt/swap
+        sudo swapon /mnt/swap
 
     - name: Prepare Environment
       run: |
