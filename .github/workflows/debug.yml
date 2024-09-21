@@ -29,7 +29,15 @@ jobs:
     - name: Setup tmate session
       uses: mxschmitt/action-tmate@v3
       if : ${{ github.event_name == 'workflow_dispatch' }}
-    
+      
+    - name: Run build
+      run: | 
+        timeout 315m bash cmd.sh || echo
+        
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
+      if : ${{ github.event_name == 'workflow_dispatch' }}
+      
     - name: tar out
       run: |
         sudo tar --use-compress-program="zstd -1 -T0" -cvpf /mnt/build/out.tar /mnt/build/out
