@@ -25,19 +25,19 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
-    - name: Maximize build space
-      uses: rokibhasansagar/slimhub_actions@main
-      with:
-        retain: "docker_buildkit"
-
     - name: Build and push Docker image
       id: push
       uses: docker/build-push-action@v6
       with:
         context: build-image
-        file: ./Dockerfile
         push: true
         tags: ${{ env.VERSION }}
         labels: brave-build
         build-args: |
           "VERSION=${{ env.VERSION }}"
+
+    - name: Maximize build space
+      uses: rokibhasansagar/slimhub_actions@main
+      with:
+        retain: "docker_buildkit"
+
