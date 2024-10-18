@@ -21,11 +21,8 @@ jobs:
       run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag brave ghcr.io/${{ github.repository_owner }}/brave:v1.69.162
-    - name: Save container image
-      run: |
-         docker save brave | zstd -T0 -1 -o brave.tar.zst
+      run: docker build . --file Dockerfile --tag brave ghcr.io/${{ github.repository_owner }}/brave:v1.71.114
             
     - name: Push image
       run: |
-        docker push ghcr.io/${{ github.repository_owner }}/brave:v1.69.162
+        docker push ghcr.io/${{ github.repository_owner }}/brave:v1.71.114
