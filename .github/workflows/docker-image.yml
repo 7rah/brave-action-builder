@@ -36,8 +36,7 @@ jobs:
       with:
         context: build-image
         push: true
-        tags: ${{ env.VERSION }}
-        labels: ${{ secrets.DOCKER_USERNAME }}/brave-build
+        tags: ${{ secrets.DOCKER_USERNAME }}/brave-build/${{ env.VERSION }}
         build-args: |
           "VERSION=${{ env.VERSION }}"
 
