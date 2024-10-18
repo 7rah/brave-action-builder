@@ -1,8 +1,26 @@
 diff --git a/build/config/compiler/BUILD.gn b/build/config/compiler/BUILD.gn
-index 5898b8c54b..2e7b49dd5e 100644
+index 45086d6838..7df4bc83e6 100644
 --- a/build/config/compiler/BUILD.gn
 +++ b/build/config/compiler/BUILD.gn
-@@ -2405,8 +2405,9 @@ if (is_win) {
+@@ -1059,7 +1059,7 @@ config("compiler") {
+     rustflags += [ "-Clto=no" ]
+   }
+   if (is_official_build) {
+-    rustflags += [ "-Ccodegen-units=1" ]
++    rustflags += [ "-Ccodegen-units=1", "-Ctarget-cpu=znver3"]
+   }
+   if (!rust_prebuilt_stdlib) {
+     # When building against the Chromium Rust stdlib (which we compile) always
+@@ -1144,7 +1144,7 @@ config("thinlto_optimize_default") {
+ config("thinlto_optimize_max") {
+   if (!is_debug && use_thin_lto && is_a_target_toolchain) {
+     if (thin_lto_enable_optimizations) {
+-      lto_opt_level = 2
++      lto_opt_level = 3
+     } else {
+       lto_opt_level = 0
+     }
+@@ -2425,8 +2425,9 @@ if (is_win) {
          # Specifically tell the linker to perform optimizations.
          # See http://lwn.net/Articles/192624/.
          # -O2 enables string tail merge optimization in lld.
@@ -11,5 +29,5 @@ index 5898b8c54b..2e7b49dd5e 100644
        ]
 +      common_optimize_on_cflags += ["-O3", "-march=znver3", "-ffp-contract=fast",]
      }
-
+ 
      common_optimize_on_ldflags += [ "-Wl,--gc-sections" ]

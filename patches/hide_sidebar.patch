@@ -1,0 +1,18 @@
+diff --git a/browser/ui/views/sidebar/sidebar_container_view.cc b/browser/ui/views/sidebar/sidebar_container_view.cc
+index 9eefd23e..b514a886 100644
+--- a/browser/ui/views/sidebar/sidebar_container_view.cc
++++ b/browser/ui/views/sidebar/sidebar_container_view.cc
+@@ -303,8 +303,11 @@ void SidebarContainerView::Layout(PassKey) {
+     control_view_width = 0;
+   }
+ 
+-  const int control_view_x =
+-      sidebar_on_left_ ? 0 : width() - control_view_width;
++  control_view_width = 0;
++
++  //const int control_view_x =
++  //    sidebar_on_left_ ? 0 : width() - control_view_width;
++  const int control_view_x = 0;
+   const int side_panel_x = sidebar_on_left_ ? control_view_width : 0;
+   sidebar_control_view_->SetBounds(control_view_x, 0, control_view_width,
+                                    height());

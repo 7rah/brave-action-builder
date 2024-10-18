@@ -1,0 +1,17 @@
+diff --git a/BUILD.gn b/BUILD.gn
+index 31c6a0a3..3dc458fc 100644
+--- a/BUILD.gn
++++ b/BUILD.gn
+@@ -318,11 +318,7 @@ group("create_dist") {
+     }
+   }
+   if (is_linux) {
+-    deps += [
+-      ":theme_files",
+-      "//brave/app/linux:dist_resources",
+-      "//chrome/installer/linux:$linux_channel",
+-    ]
++    deps += [ ":create_dist_zips" ]
+   }
+ }
+ 

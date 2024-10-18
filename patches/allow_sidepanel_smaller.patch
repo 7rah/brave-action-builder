@@ -1,0 +1,13 @@
+diff --git a/components/sidebar/browser/constants.h b/components/sidebar/browser/constants.h
+index b45861ec..71ac0d95 100644
+--- a/components/sidebar/browser/constants.h
++++ b/components/sidebar/browser/constants.h
+@@ -13,7 +13,7 @@ inline constexpr char kSidebarItemTypeKey[] = "type";
+ inline constexpr char kSidebarItemBuiltInItemTypeKey[] = "built_in_item_type";
+ inline constexpr char kSidebarItemTitleKey[] = "title";
+ inline constexpr char kSidebarItemOpenInPanelKey[] = "open_in_panel";
+-constexpr int kDefaultSidePanelWidth = 320;
++constexpr int kDefaultSidePanelWidth = 50;
+ 
+ // list is provided from chrome layer.
+ inline constexpr char kBraveTalkURL[] = "https://talk.brave.com/widget";
