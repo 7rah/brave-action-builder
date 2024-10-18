@@ -35,7 +35,7 @@ jobs:
       run: sh ./scripts/create_swap.sh
 
     - name: Init folder
-      run |
+      run: |
         sudo mkdir -p /mnt/build
         sudo mkdir -p /mnt/build/out
         sudo chown `whoami` /mnt/build
