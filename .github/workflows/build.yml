@@ -67,9 +67,9 @@ jobs:
         
     - name: Maximize build space
       uses: rokibhasansagar/slimhub_actions@main
+      if : ${{ env.DEBUG == false }}
       with:
-        retain: "docker_buildkit"
-      
+        retain: "docker_buildkit"      
     - name: Mkdir /out/build
       run: |
         sudo mkdir -p /mnt/build
@@ -114,9 +114,9 @@ jobs:
         
     - name: Maximize build space
       uses: rokibhasansagar/slimhub_actions@main
+      if : ${{ env.DEBUG == false }}
       with:
-        retain: "docker_buildkit"
-      
+        retain: "docker_buildkit"      
     - name: Mkdir /out/build
       run: |
         sudo mkdir -p /mnt/build
@@ -161,9 +161,9 @@ jobs:
         
     - name: Maximize build space
       uses: rokibhasansagar/slimhub_actions@main
+      if : ${{ env.DEBUG == false }}
       with:
-        retain: "docker_buildkit"
-      
+        retain: "docker_buildkit"      
     - name: Mkdir /out/build
       run: |
         sudo mkdir -p /mnt/build
@@ -208,9 +208,9 @@ jobs:
         
     - name: Maximize build space
       uses: rokibhasansagar/slimhub_actions@main
+      if : ${{ env.DEBUG == false }}
       with:
-        retain: "docker_buildkit"
-      
+        retain: "docker_buildkit"      
     - name: Mkdir /out/build
       run: |
         sudo mkdir -p /mnt/build
@@ -255,9 +255,9 @@ jobs:
         
     - name: Maximize build space
       uses: rokibhasansagar/slimhub_actions@main
+      if : ${{ env.DEBUG == false }}
       with:
-        retain: "docker_buildkit"
-      
+        retain: "docker_buildkit"      
     - name: Mkdir /out/build
       run: |
         sudo mkdir -p /mnt/build
