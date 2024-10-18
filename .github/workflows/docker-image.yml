@@ -13,13 +13,11 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
       
-    - name: Get version
+    - name: Setup version
       id: version
       run: |
         echo "VERSION=$(cat ./VERSION)" >> $GITHUB_ENV
-
-    - name: Use VERSION variable
-      run: echo "The version is $VERSION"
+        echo "The brave version is $VERSION"
 
     - name: Log in to Docker Hub
       uses: docker/login-action@master
@@ -39,7 +37,7 @@ jobs:
         context: build-image
         file: ./Dockerfile
         push: true
-        tags: ${{ env.version }}
+        tags: ${{ env.VERSION }}
         labels: brave-build
         build-args: |
-          "VERSION=${{ env.version }}"
+          "VERSION=${{ env.VERSION }}"
