@@ -40,4 +40,4 @@ jobs:
         tags: ${{ env.version }}
         labels: brave-build
         build-args:
-          - VERSION=${{ env.version }}
+          - VERSION: ${{ env.version }}
