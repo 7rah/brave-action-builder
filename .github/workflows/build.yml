@@ -5,6 +5,7 @@ on:
 
 env:
   BUILD_TIME: "1m"
+  DEBUG: true
 
 jobs:
 
@@ -16,6 +17,7 @@ jobs:
       
     - name: Maximize build space
       uses: rokibhasansagar/slimhub_actions@main
+      if : ${{ env.DEBUG == false }}
       with:
         retain: "docker_buildkit"
 
