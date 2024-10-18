@@ -1,4 +1,4 @@
-sudo fallocate -l 32G /swapfile
+sudo fallocate -l 28G /swapfile
 sudo fallocate -l 32G /mnt/swapfile-new
 
 sudo chmod 600 /swapfile
