@@ -13,11 +13,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
       
-    - name: Get tag name
+    - name: Get version
       id: version
       run: |
-        echo "VERSION=$(cat VERSION)" >> $GITHUB_ENV
-        echo version=${{ env.version }}
+        echo "VERSION=$(cat ./VERSION)" >> $GITHUB_ENV
+
+    - name: Use VERSION variable
+      run: echo "The version is $VERSION"
 
     - name: Log in to Docker Hub
       uses: docker/login-action@master
