@@ -9,8 +9,8 @@ on:
       - '.github/workflows/build.yml'
 
 env:
-  BUILD_TIME: "1m"
-  DEBUG: true
+  BUILD_TIME: "315m"
+  DEBUG: false
   CONTAINER_NAME: "brave-build"
 
 jobs:
