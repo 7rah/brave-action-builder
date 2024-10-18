@@ -6,6 +6,7 @@ on:
     paths:
       - 'scripts/**'
       - 'VERSION'
+      - '.github/workflows/build.yml'
 
 env:
   BUILD_TIME: "1m"
@@ -27,7 +28,7 @@ jobs:
         retain: "docker_buildkit"
 
     - name: Setup version
-      run: echo "::set-output VERSION=$(cat ./VERSION)"
+      run: echo "VERSION=$(cat ./VERSION)" >> $GITHUB_ENV
 
     #- name: Setup tmate session
     #  uses: mxschmitt/action-tmate@v3
@@ -71,7 +72,11 @@ jobs:
       uses: rokibhasansagar/slimhub_actions@main
       if : ${{ env.DEBUG == false }}
       with:
-        retain: "docker_buildkit"      
+        retain: "docker_buildkit"
+
+    - name: Setup version
+      run: echo "VERSION=$(cat ./VERSION)" >> $GITHUB_ENV
+   
     - name: Mkdir /out/build
       run: |
         sudo mkdir -p /mnt/build
@@ -118,7 +123,11 @@ jobs:
       uses: rokibhasansagar/slimhub_actions@main
       if : ${{ env.DEBUG == false }}
       with:
-        retain: "docker_buildkit"      
+        retain: "docker_buildkit"
+
+    - name: Setup version
+      run: echo "VERSION=$(cat ./VERSION)" >> $GITHUB_ENV
+   
     - name: Mkdir /out/build
       run: |
         sudo mkdir -p /mnt/build
@@ -165,7 +174,11 @@ jobs:
       uses: rokibhasansagar/slimhub_actions@main
       if : ${{ env.DEBUG == false }}
       with:
-        retain: "docker_buildkit"      
+        retain: "docker_buildkit"
+
+    - name: Setup version
+      run: echo "VERSION=$(cat ./VERSION)" >> $GITHUB_ENV
+   
     - name: Mkdir /out/build
       run: |
         sudo mkdir -p /mnt/build
@@ -212,7 +225,11 @@ jobs:
       uses: rokibhasansagar/slimhub_actions@main
       if : ${{ env.DEBUG == false }}
       with:
-        retain: "docker_buildkit"      
+        retain: "docker_buildkit"
+
+    - name: Setup version
+      run: echo "VERSION=$(cat ./VERSION)" >> $GITHUB_ENV
+   
     - name: Mkdir /out/build
       run: |
         sudo mkdir -p /mnt/build
@@ -259,7 +276,11 @@ jobs:
       uses: rokibhasansagar/slimhub_actions@main
       if : ${{ env.DEBUG == false }}
       with:
-        retain: "docker_buildkit"      
+        retain: "docker_buildkit"
+
+    - name: Setup version
+      run: echo "VERSION=$(cat ./VERSION)" >> $GITHUB_ENV
+   
     - name: Mkdir /out/build
       run: |
         sudo mkdir -p /mnt/build
