@@ -4,7 +4,6 @@ on:
   workflow_dispatch:
   push:
 
-
 jobs:
 
   build:
@@ -31,13 +30,13 @@ jobs:
       with:
         retain: "docker_buildkit"
 
-
     - name: Build and push Docker image
       id: push
       uses: docker/build-push-action@master
       with:
-        context: .
+        context: build-image
         file: ./Dockerfile
         push: true
         tags: ${{ env.version }}
         labels: brave-build
+        build-args: ["VERSION=${{ env.version }}"]
