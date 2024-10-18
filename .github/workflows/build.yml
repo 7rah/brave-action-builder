@@ -3,6 +3,8 @@ name: Build Brave
 on:
   workflow_dispatch:
 
+env:
+  BUILD_TIME: "1m"
 
 jobs:
 
@@ -18,10 +20,7 @@ jobs:
         retain: "docker_buildkit"
 
     - name: Setup version
-      id: version
-      run: |
-        echo "VERSION=$(cat ./VERSION)" >> $GITHUB_ENV
-        echo "The brave version is $VERSION"
+      run: echo "VERSION=$(cat ./VERSION)" >> $GITHUB_ENV
 
     #- name: Setup tmate session
     #  uses: mxschmitt/action-tmate@v3
@@ -31,30 +30,21 @@ jobs:
       run: docker pull ${{ secrets.DOCKER_USERNAME }}/brave-browser:$VERSION
 
     - name: Create swap file
-      run: |
-        sudo fallocate -l 32G /swapfile
-        sudo fallocate -l 32G /mnt/swapfile
-        sudo chmod 600 /swapfile
-        sudo chmod 600 /mnt/swapfile
-        sudo mkswap /swapfile
-        sudo mkswap /mnt/swapfile
-        sudo swapon /swapfile
-        sudo swapon /mnt/swapfile
+      run: sh ./scripts/create_swap.sh
 
-
-    
-    - name: Run build
-      run: |
+    - name: Init folder
+      run |
         sudo mkdir -p /mnt/build
         sudo mkdir -p /mnt/build/out
         sudo chown `whoami` /mnt/build
         sudo chown -R 1000:1000 /mnt/build/out
-        timeout 315m bash cmd.sh || echo
-    - name: tar out
-      run: |
-        sudo rm -rf /mnt/build/out/Static/chrome.tmp*
-        sudo rm -rf /mnt/build/out/Static/thinlto-cache
-        sudo tar --use-compress-program="zstd -1 -T0" -cvpf /mnt/build/out.tar /mnt/build/out
+
+    - name: Run build
+      run: timeout $BUILD_TIME bash ./scripts/build.sh ${{ secrets.DOCKER_USERNAME }}/brave-browser:$VERSION || echo
+
+    - name: Tar build result
+      run: sh ./scripts/tar_build_result.sh
+
     - name: Upload build result
       uses: actions/upload-artifact@v4
       with:
@@ -84,31 +74,23 @@ jobs:
       with:
         name: build-1
         path: /mnt/build
-
     - name: Restore build result
       run: |
         sudo tar -xvf /mnt/build/out.tar -C /
         sudo rm /mnt/build/out.tar
       
     - name: Download the Docker image
-      run: docker pull chezzn/brave
+      run: docker pull ${{ secrets.DOCKER_USERNAME }}/brave-browser:$VERSION
 
     - name: Create swap file
-      run: |
-        sudo fallocate -l 32G /swapfile
-        sudo chmod 600 /swapfile
-        sudo mkswap /swapfile
-        sudo swapon /swapfile
+      run: sh ./scripts/create_swap.sh
 
     - name: Run build
-      run: | 
-        timeout 315m bash cmd.sh || echo
+      run: timeout $BUILD_TIME bash ./scripts/build.sh ${{ secrets.DOCKER_USERNAME }}/brave-browser:$VERSION || echo
     
-    - name: tar out
-      run: |
-        sudo rm -rf /mnt/build/out/Static/chrome.tmp*
-        sudo rm -rf /mnt/build/out/Static/thinlto-cache
-        sudo tar --use-compress-program="zstd -1 -T0" -cvpf /mnt/build/out.tar /mnt/build/out
+    - name: Tar build result
+      run: sh ./scripts/tar_build_result.sh
+
     - name: Upload build result
       uses: actions/upload-artifact@v4
       with:
@@ -146,24 +128,17 @@ jobs:
         sudo rm /mnt/build/out.tar
       
     - name: Download the Docker image
-      run: docker pull chezzn/brave
+      run: docker pull ${{ secrets.DOCKER_USERNAME }}/brave-browser:$VERSION
 
     - name: Create swap file
-      run: |
-        sudo fallocate -l 32G /swapfile
-        sudo chmod 600 /swapfile
-        sudo mkswap /swapfile
-        sudo swapon /swapfile
-
+      run: sh ./scripts/create_swap.sh
+      
     - name: Run build
-      run: | 
-        timeout 315m bash cmd.sh || echo
+      run: timeout $BUILD_TIME bash ./scripts/build.sh ${{ secrets.DOCKER_USERNAME }}/brave-browser:$VERSION || echo
     
-    - name: tar out
-      run: |
-        sudo rm -rf /mnt/build/out/Static/chrome.tmp*
-        sudo rm -rf /mnt/build/out/Static/thinlto-cache
-        sudo tar --use-compress-program="zstd -1 -T0" -cvpf /mnt/build/out.tar /mnt/build/out
+    - name: Tar build result
+      run: sh ./scripts/tar_build_result.sh
+
     - name: Upload build result
       uses: actions/upload-artifact@v4
       with:
@@ -200,24 +175,17 @@ jobs:
         sudo rm /mnt/build/out.tar
       
     - name: Download the Docker image
-      run: docker pull chezzn/brave
+      run: docker pull ${{ secrets.DOCKER_USERNAME }}/brave-browser:$VERSION
 
     - name: Create swap file
-      run: |
-        sudo fallocate -l 32G /swapfile
-        sudo chmod 600 /swapfile
-        sudo mkswap /swapfile
-        sudo swapon /swapfile
+      run: sh ./scripts/create_swap.sh
 
     - name: Run build
-      run: | 
-        timeout 315m bash cmd.sh || echo
+      run: timeout $BUILD_TIME bash ./scripts/build.sh ${{ secrets.DOCKER_USERNAME }}/brave-browser:$VERSION || echo
     
-    - name: tar out
-      run: |
-        sudo rm -rf /mnt/build/out/Static/chrome.tmp*
-        sudo rm -rf /mnt/build/out/Static/thinlto-cache
-        sudo tar --use-compress-program="zstd -1 -T0" -cvpf /mnt/build/out.tar /mnt/build/out
+    - name: Tar build result
+      run: sh ./scripts/tar_build_result.sh
+
     - name: Upload build result
       uses: actions/upload-artifact@v4
       with:
@@ -254,24 +222,17 @@ jobs:
         sudo rm /mnt/build/out.tar
       
     - name: Download the Docker image
-      run: docker pull chezzn/brave
+      run: docker pull ${{ secrets.DOCKER_USERNAME }}/brave-browser:$VERSION
 
     - name: Create swap file
-      run: |
-        sudo fallocate -l 32G /swapfile
-        sudo chmod 600 /swapfile
-        sudo mkswap /swapfile
-        sudo swapon /swapfile
+      run: sh ./scripts/create_swap.sh
 
     - name: Run build
-      run: | 
-        timeout 315m bash cmd.sh || echo
+      run: timeout $BUILD_TIME bash ./scripts/build.sh ${{ secrets.DOCKER_USERNAME }}/brave-browser:$VERSION || echo
     
-    - name: tar out
-      run: |
-        sudo rm -rf /mnt/build/out/Static/chrome.tmp*
-        sudo rm -rf /mnt/build/out/Static/thinlto-cache
-        sudo tar --use-compress-program="zstd -1 -T0" -cvpf /mnt/build/out.tar /mnt/build/out
+    - name: Tar build result
+      run: sh ./scripts/tar_build_result.sh
+
     - name: Upload build result
       uses: actions/upload-artifact@v4
       with:
@@ -308,24 +269,17 @@ jobs:
         sudo rm /mnt/build/out.tar
       
     - name: Download the Docker image
-      run: docker pull chezzn/brave
+      run: docker pull ${{ secrets.DOCKER_USERNAME }}/brave-browser:$VERSION
 
     - name: Create swap file
-      run: |
-        sudo fallocate -l 32G /swapfile
-        sudo chmod 600 /swapfile
-        sudo mkswap /swapfile
-        sudo swapon /swapfile
+      run: sh ./scripts/create_swap.sh
 
     - name: Run build
-      run: | 
-        timeout 315m bash cmd.sh || echo
+      run: timeout $BUILD_TIME bash ./scripts/build.sh ${{ secrets.DOCKER_USERNAME }}/brave-browser:$VERSION || echo
     
-    - name: tar out
-      run: |
-        sudo rm -rf /mnt/build/out/Static/chrome.tmp*
-        sudo rm -rf /mnt/build/out/Static/thinlto-cache
-        sudo tar --use-compress-program="zstd -1 -T0" -cvpf /mnt/build/out.tar /mnt/build/out
+    - name: Tar build result
+      run: sh ./scripts/tar_build_result.sh
+
     - name: Upload build result
       uses: actions/upload-artifact@v4
       with:
