@@ -16,7 +16,18 @@ RUN npm install
 
 RUN echo "is_brave_release_build=1" > .env
 
-COPY no-history.patch .
-RUN git apply no-history.patch
+COPY patches /brave-browser/patches
+
+RUN git apply /brave-browser/patches/no-history.patch
 
 RUN npm run init
+
+WORKDIR /brave-browser/src
+RUN patch -p1 < /brave-browser/patches/optimize.patch
+
+WORKDIR /brave-browser/src/brave
+RUN patch -p1 < /brave-browser/patches/create_zip_dist.patch && \
+    patch -p1 < /brave-browser/patches/allow_sidepanel_smaller.patch && \
+    patch -p1 < /brave-browser/patches/hide_sidebar.patch && \
+    patch -p1 < /brave-browser/patches/hide_horizontal_tabbar.patch
+ 
