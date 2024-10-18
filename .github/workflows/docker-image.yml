@@ -3,6 +3,9 @@ name: Docker Image CI
 on:
   workflow_dispatch:
   push:
+    paths:
+      - 'build-image/**'
+      - 'VERSION'
 
 jobs:
 
