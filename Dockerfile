@@ -7,7 +7,7 @@ RUN apt update && apt install -y gperf sudo nano
 RUN mkdir /brave-browser && chown -R node:node /brave-browser
 USER node
 
-ENV VERSION="v1.69.162"
+ENV VERSION="v1.71.114"
 
 RUN git clone --branch $VERSION --depth 1 https://github.com/brave/brave-core.git /brave-browser/src/brave
 
