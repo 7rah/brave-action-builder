@@ -6,6 +6,7 @@ on:
 env:
   BUILD_TIME: "1m"
   DEBUG: true
+  CONTAINER_NAME: "brave-build"
 
 jobs:
 
@@ -29,7 +30,7 @@ jobs:
     #  if : ${{ github.event_name == 'workflow_dispatch' }}
 
     - name: Download the Docker image
-      run: docker pull ${{ secrets.DOCKER_USERNAME }}/brave-browser:${{ env.VERSION }}
+      run: docker pull ${{ secrets.DOCKER_USERNAME }}/${{ env.CONTAINER_NAME }}:${{ env.VERSION }}
 
     - name: Create swap file
       run: sh ./scripts/create_swap.sh
@@ -42,7 +43,7 @@ jobs:
         sudo chown -R 1000:1000 /mnt/build/out
 
     - name: Run build
-      run: timeout $BUILD_TIME bash ./scripts/build.sh ${{ secrets.DOCKER_USERNAME }}/brave-browser:${{ env.VERSION }} || echo
+      run: timeout $BUILD_TIME bash ./scripts/build.sh ${{ secrets.DOCKER_USERNAME }}/${{ env.CONTAINER_NAME }}:${{ env.VERSION }} || echo
 
     - name: Tar build result
       run: sh ./scripts/tar_build_result.sh
@@ -82,13 +83,13 @@ jobs:
         sudo rm /mnt/build/out.tar
       
     - name: Download the Docker image
-      run: docker pull ${{ secrets.DOCKER_USERNAME }}/brave-browser:${{ env.VERSION }}
+      run: docker pull ${{ secrets.DOCKER_USERNAME }}/${{ env.CONTAINER_NAME }}:${{ env.VERSION }}
 
     - name: Create swap file
       run: sh ./scripts/create_swap.sh
 
     - name: Run build
-      run: timeout $BUILD_TIME bash ./scripts/build.sh ${{ secrets.DOCKER_USERNAME }}/brave-browser:${{ env.VERSION }} || echo
+      run: timeout $BUILD_TIME bash ./scripts/build.sh ${{ secrets.DOCKER_USERNAME }}/${{ env.CONTAINER_NAME }}:${{ env.VERSION }} || echo
     
     - name: Tar build result
       run: sh ./scripts/tar_build_result.sh
@@ -130,13 +131,13 @@ jobs:
         sudo rm /mnt/build/out.tar
       
     - name: Download the Docker image
-      run: docker pull ${{ secrets.DOCKER_USERNAME }}/brave-browser:${{ env.VERSION }}
+      run: docker pull ${{ secrets.DOCKER_USERNAME }}/${{ env.CONTAINER_NAME }}:${{ env.VERSION }}
 
     - name: Create swap file
       run: sh ./scripts/create_swap.sh
       
     - name: Run build
-      run: timeout $BUILD_TIME bash ./scripts/build.sh ${{ secrets.DOCKER_USERNAME }}/brave-browser:${{ env.VERSION }} || echo
+      run: timeout $BUILD_TIME bash ./scripts/build.sh ${{ secrets.DOCKER_USERNAME }}/${{ env.CONTAINER_NAME }}:${{ env.VERSION }} || echo
     
     - name: Tar build result
       run: sh ./scripts/tar_build_result.sh
@@ -177,13 +178,13 @@ jobs:
         sudo rm /mnt/build/out.tar
       
     - name: Download the Docker image
-      run: docker pull ${{ secrets.DOCKER_USERNAME }}/brave-browser:${{ env.VERSION }}
+      run: docker pull ${{ secrets.DOCKER_USERNAME }}/${{ env.CONTAINER_NAME }}:${{ env.VERSION }}
 
     - name: Create swap file
       run: sh ./scripts/create_swap.sh
 
     - name: Run build
-      run: timeout $BUILD_TIME bash ./scripts/build.sh ${{ secrets.DOCKER_USERNAME }}/brave-browser:${{ env.VERSION }} || echo
+      run: timeout $BUILD_TIME bash ./scripts/build.sh ${{ secrets.DOCKER_USERNAME }}/${{ env.CONTAINER_NAME }}:${{ env.VERSION }} || echo
     
     - name: Tar build result
       run: sh ./scripts/tar_build_result.sh
@@ -224,13 +225,13 @@ jobs:
         sudo rm /mnt/build/out.tar
       
     - name: Download the Docker image
-      run: docker pull ${{ secrets.DOCKER_USERNAME }}/brave-browser:${{ env.VERSION }}
+      run: docker pull ${{ secrets.DOCKER_USERNAME }}/${{ env.CONTAINER_NAME }}:${{ env.VERSION }}
 
     - name: Create swap file
       run: sh ./scripts/create_swap.sh
 
     - name: Run build
-      run: timeout $BUILD_TIME bash ./scripts/build.sh ${{ secrets.DOCKER_USERNAME }}/brave-browser:${{ env.VERSION }} || echo
+      run: timeout $BUILD_TIME bash ./scripts/build.sh ${{ secrets.DOCKER_USERNAME }}/${{ env.CONTAINER_NAME }}:${{ env.VERSION }} || echo
     
     - name: Tar build result
       run: sh ./scripts/tar_build_result.sh
@@ -271,13 +272,13 @@ jobs:
         sudo rm /mnt/build/out.tar
       
     - name: Download the Docker image
-      run: docker pull ${{ secrets.DOCKER_USERNAME }}/brave-browser:${{ env.VERSION }}
+      run: docker pull ${{ secrets.DOCKER_USERNAME }}/${{ env.CONTAINER_NAME }}:${{ env.VERSION }}
 
     - name: Create swap file
       run: sh ./scripts/create_swap.sh
 
     - name: Run build
-      run: timeout $BUILD_TIME bash ./scripts/build.sh ${{ secrets.DOCKER_USERNAME }}/brave-browser:${{ env.VERSION }} || echo
+      run: timeout $BUILD_TIME bash ./scripts/build.sh ${{ secrets.DOCKER_USERNAME }}/${{ env.CONTAINER_NAME }}:${{ env.VERSION }} || echo
     
     - name: Tar build result
       run: sh ./scripts/tar_build_result.sh
