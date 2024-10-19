@@ -23,7 +23,6 @@ jobs:
       
     - name: Maximize build space
       uses: rokibhasansagar/slimhub_actions@main
-      if : ${{ env.DEBUG == false }}
       with:
         retain: "docker_buildkit"
 
@@ -70,7 +69,6 @@ jobs:
         
     - name: Maximize build space
       uses: rokibhasansagar/slimhub_actions@main
-      if : ${{ env.DEBUG == false }}
       with:
         retain: "docker_buildkit"
 
@@ -121,7 +119,6 @@ jobs:
         
     - name: Maximize build space
       uses: rokibhasansagar/slimhub_actions@main
-      if : ${{ env.DEBUG == false }}
       with:
         retain: "docker_buildkit"
 
@@ -172,7 +169,6 @@ jobs:
         
     - name: Maximize build space
       uses: rokibhasansagar/slimhub_actions@main
-      if : ${{ env.DEBUG == false }}
       with:
         retain: "docker_buildkit"
 
@@ -223,7 +219,6 @@ jobs:
         
     - name: Maximize build space
       uses: rokibhasansagar/slimhub_actions@main
-      if : ${{ env.DEBUG == false }}
       with:
         retain: "docker_buildkit"
 
@@ -274,7 +269,6 @@ jobs:
         
     - name: Maximize build space
       uses: rokibhasansagar/slimhub_actions@main
-      if : ${{ env.DEBUG == false }}
       with:
         retain: "docker_buildkit"
 
