@@ -65,6 +65,7 @@ npm run build -- Static --gn is_official_build:true --gn chrome_pgo_phase:2 --gn
 --gn brave_services_dev_domain:\"brave.software\"                                                                         \
 --gn brave_services_key_id:\"linux-129-release\"                                                                       \
 --gn service_key_aichat:\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"                                                                          \
+--gn service_key_stt:\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"
 | tee
 
 '
